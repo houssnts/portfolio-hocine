@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Hocine ZARED - BUT 3 Informatique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --surface-color: #1e293b;
+            --surface-light: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; overflow-x: hidden; }
+        
+        h1, h2, h3, h4, h5 { color: #ffffff; }
+        p { margin-bottom: 1rem; font-size: 1.05rem; }
+        .highlight { color: var(--accent); font-weight: 600; }
+        
+        /* Navbar */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; background: rgba(11, 17, 32, 0.95); backdrop-filter: blur(12px); display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid var(--surface-light); }
+        nav .logo { font-size: 1.5rem; font-weight: 800; }
+        nav .logo span { color: var(--accent); }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* Header */
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; background: radial-gradient(circle at top right, #1e293b 0%, #0b1120 100%); position: relative; padding-top: 80px; }
+        header h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px; }
+        header h2 { font-size: 1.5rem; color: var(--text-muted); font-weight: 400; margin-bottom: 30px; }
+        .intro-text { max-width: 900px; font-size: 1.1rem; color: #cbd5e1; margin-bottom: 30px; border-left: 4px solid var(--accent); padding-left: 20px; background: rgba(30, 41, 59, 0.4); padding: 20px; border-radius: 0 12px 12px 0; }
+
+        /* Containers */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 5%; }
+        .section-header { margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.2rem; display: inline-block; position: relative; padding-bottom: 10px; }
+        .section-header h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50%; height: 4px; background: var(--accent); border-radius: 2px; }
+
+        /* Mémos SAÉ (Strict Format) */
+        .sae-memo { background: var(--surface-color); border: 1px solid var(--surface-light); border-radius: 12px; padding: 30px; margin-bottom: 30px; position: relative; }
+        .sae-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--surface-light); padding-bottom: 15px; margin-bottom: 20px; }
+        .sae-title { font-size: 1.5rem; color: var(--accent); }
+        .sae-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .sae-item strong { display: block; color: #e2e8f0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .sae-item { background: rgba(15, 23, 42, 0.5); padding: 15px; border-radius: 8px; font-size: 0.95rem; }
+        
+        /* Traces Buttons */
+        .traces-container { display: flex; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--surface-light); flex-wrap: wrap; }
+        .btn-trace { padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .btn-github { background: #24292e; color: white; border: 1px solid #444d56; }
+        .btn-github:hover { background: #2f363d; }
+        .btn-drive { background: rgba(59, 130, 246, 0.1); color: var(--accent); border: 1px solid var(--accent); }
+        .btn-drive:hover { background: var(--accent); color: white; }
+
+        /* Auto-Evaluation Table */
+        .eval-table-wrapper { overflow-x: auto; margin-bottom: 40px; border-radius: 12px; border: 1px solid var(--surface-light); }
+        table { width: 100%; border-collapse: collapse; background: var(--surface-color); min-width: 900px; }
+        th { background: #0f172a; color: var(--accent); text-align: left; padding: 15px; font-weight: 600; border-bottom: 1px solid var(--surface-light); }
+        td { padding: 15px; border-bottom: 1px solid var(--surface-light); color: #cbd5e1; font-size: 0.95rem; vertical-align: top; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* Competences & Modules */
+        .comp-block { background: var(--surface-color); border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid var(--accent); }
+        .comp-title { font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .module-tag { display: inline-block; background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin: 0 5px 10px 0; border: 1px solid rgba(16, 185, 129, 0.2); }
+        
+        /* Bilan Stage / Agdel */
+        .stage-box { background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid var(--accent); border-radius: 12px; padding: 40px; position: relative; }
+        .badge { position: absolute; top: -15px; right: 30px; background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; }
+        
+        /* Grid for smaller elements */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            header h1 { font-size: 2.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Hocine<span>Zared</span></div>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/hocine-zared-589766251/" target="_blank" style="color: #3b82f6;"><i class="fab fa-linkedin" style="font-size: 1.1rem;"></i> LinkedIn</a></li>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#memos">Mémos SAÉ</a></li>
+            <li><a href="#auto-eval">Auto-évaluation</a></li>
+            <li><a href="#competences">Compétences & Modules</a></li>
+            <li><a href="#stage">Bilan Professionnel</a></li>
+        </ul>
+    </nav>
+
+    <header id="intro">
+        <div class="profile-pic" style="margin-bottom: 25px;">
+            <img src="profile.jpg" alt="Photo de Hocine ZARED" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-color); box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">
+        </div>
+        <h1>Hocine ZARED</h1>
+        <h2>BUT 3 Informatique — Université Sorbonne Paris-Nord (IUT Villetaneuse)</h2>
+        <div class="intro-text">
+            <p><strong>Logique de parcours & Poursuite d'études :</strong><br>
+            Mon parcours en Informatique s'inscrit dans une démarche continue d'acquisition et de valorisation de compétences. Titulaire d'un BTS SIO option SLAM validé avec succès (14,47/20), l'intégration en BUT à l'IUT Sorbonne Paris-Nord a été une révélation méthodologique. L'approche par Situations d'Apprentissage et d'Évaluation (SAÉ) m'a permis de développer une réelle posture réflexive et critique face aux défis technologiques.</p>
+            <p>Cette formation de haute exigence a confirmé mes ambitions professionnelles : je souhaite m'orienter vers l'ingénierie hybride, mêlant la rigueur de la Data et de l'Intelligence Artificielle à la créativité du Web Design (UI/UX). Particulièrement attaché à l'excellence pédagogique de notre établissement, je souhaite poursuivre l'année prochaine au sein de la Sorbonne Paris-Nord pour parfaire mon cursus et valider pleinement ces acquis, soutenu par ma résilience et mon fort esprit d'entreprise.</p>
+        </div>
+                <div class="traces-container" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 20px; padding-top: 20px;">
+                <a href="https://drive.google.com/file/d/1ovDnVH1wZxModOb7V9yry0KIPMetDdrl/view?usp=sharing" target="_blank" class="btn-trace btn-drive"><i class="fa-solid fa-file-pdf"></i> Diplôme : Relevé de notes BTS SIO</a>
+            </div>
+    </header>
+
+    <div class="container" id="memos">
+        <div class="section-header">
+            <h2>Mémos des Activités & SAÉ (Traces)</h2>
+        </div>
+
+        <!-- Mémo 1: THALES -->
+        <div class="sae-memo">
+            <div class="sae-header">
+                <h3 class="sae-title"><i class="fa-solid fa-robot"></i> Projet Industriel : Web Scraping THALES</h3>
+            </div>
+            <div class="sae-grid">
+                <div class="sae-item"><strong>Objectif</strong>Conception d'une application d'extraction et d'analyse de données académiques sur la 6G.</div>
+                <div class="sae-item"><strong>Organisation</strong>Équipe de 5 personnes / Durée : 3 mois.</div>
+                <div class="sae-item"><strong>Tâches accomplies</strong>Scraping automatisé, intégration d'IA (LLM) pour la sémantique, création d'un tableau de bord.</div>
+                <div class="sae-item"><strong>Outils mobilisés</strong>Python, API Groq (LLM), Streamlit, Git.</div>
+                <div class="sae-item"><strong>Résultats</strong>Dashboard interactif capable de synthétiser des centaines d'articles scientifiques.</div>
+                <div class="sae-item"><strong>Valorisation pro.</strong>Maîtrise de l'intégration d'IA générative dans un flux métier industriel complexe.</div>
+            </div>
+            <div class="traces-container">
+                <a href="https://github.com/houssnts/Thales3GPP" target="_blank" class="btn-trace btn-github"><i class="fab fa-github"></i> Trace : Dépôt GitHub (Code source)</a>
+                <a href="https://drive.google.com/file/d/1xkhMVoGmv12vZ7Wt25jVDiKn5KlfndC6/view?usp=sharing" target="_blank" class="btn-trace btn-drive"><i class="fab fa-google-drive"></i> Trace : Livrable PDF Drive</a>
+            </div>
+        </div>
+
+        <!-- Mémo 2: BookWise -->
+        <div class="sae-memo">
+            <div class="sae-header">
+                <h3 class="sae-title"><i class="fa-solid fa-mobile-screen"></i> Projet Applicatif : BookWise</h3>
+            </div>
+            <div class="sae-grid">
+                <div class="sae-item"><strong>Objectif</strong>Développement complet d'une application mobile de recommandation littéraire.</div>
+                <div class="sae-item"><strong>Organisation</strong>Projet personnel approfondi / Durée : 4 mois.</div>
+                <div class="sae-item"><strong>Tâches accomplies</strong>Conception UI/UX, développement Front-End, gestion de l'état asynchrone, modélisation BDD locale.</div>
+                <div class="sae-item"><strong>Outils mobilisés</strong>Dart, Flutter, Provider (State Management), SQLite.</div>
+                <div class="sae-item"><strong>Résultats</strong>Application cross-platform fluide avec architecture maintenable.</div>
+                <div class="sae-item"><strong>Valorisation pro.</strong>Capacité à livrer un produit complet de la maquette au déploiement technique.</div>
+            </div>
+            <div class="traces-container">
+                <a href="https://github.com/BraLanSe/SAE-Appli-Mobile" target="_blank" class="btn-trace btn-github"><i class="fab fa-github"></i> Trace : Dépôt Flutter (Architecture)</a>
+            </div>
+        </div>
+
+    <!-- Mémo 4: L'Illusionniste -->
+        <div class="sae-memo">
+            <div class="sae-header">
+                <h3 class="sae-title"><i class="fa-solid fa-gamepad"></i> Projet Applicatif : L'Illusionniste</h3>
+            </div>
+            <div class="sae-grid">
+                <div class="sae-item"><strong>Objectif</strong>Développer une application interactive démontrant le phénomène du contraste simultané et la synthèse additive RGB.</div>
+                <div class="sae-item"><strong>Organisation</strong>Projet de développement algorithmique individuel.</div>
+                <div class="sae-item"><strong>Tâches accomplies</strong>Programmation de la boucle de jeu, calcul de la distance euclidienne pour la précision, conception du rapport HTML.</div>
+                <div class="sae-item"><strong>Outils mobilisés</strong>Python, Pygame.</div>
+                <div class="sae-item"><strong>Résultats</strong>Jeu fonctionnel et fluide avec rapport technique d'optimisation.</div>
+                <div class="sae-item"><strong>Valorisation pro.</strong>Application concrète de concepts mathématiques complexes (distance euclidienne, matrices RGB) au sein d'une interface graphique interactive.</div>
+            </div>
+            <div class="traces-container">
+                <a href="https://github.com/houssnts/Illusionniste" target="_blank" class="btn-trace btn-github"><i class="fab fa-github"></i> Trace : Dépôt GitHub (Code source)</a>
+                <a href=https://drive.google.com/file/d/1LjxAvLG34SOacfcTqkJFtNgc4Waeu8Gn/view?usp=sharing" target="_blank" class="btn-trace btn-drive"><i class="fab fa-google-drive"></i> Trace : Livrable Final (PDF)</a>
+            </div>
+        </div>
+
+        <!-- Mémo 5: SAÉ S6 - Diagramme de Voronoï -->
+        <div class="sae-memo">
+            <div class="sae-header">
+                <h3 class="sae-title"><i class="fa-solid fa-circle-nodes"></i> SAÉ S6 : Générateur de Diagramme de Voronoï</h3>
+            </div>
+            <div class="sae-grid">
+                <div class="sae-item"><strong>Objectif</strong>Conception d'une application de génération et visualisation de diagrammes de Voronoï.</div>
+                <div class="sae-item"><strong>Organisation</strong>SAÉ de fin de BUT 3 (Semestre 6).</div>
+                <div class="sae-item"><strong>Tâches accomplies</strong>Colorisation de pixels via matrices, conception de l'interface graphique (GUI), écriture de tests unitaires de validation.</div>
+                <div class="sae-item"><strong>Outils mobilisés</strong>Python, Numpy, Matplotlib, Tkinter, Pytest.</div>
+                <div class="sae-item"><strong>Résultats</strong>Outil Desktop robuste avec une excellente couverture de tests.</div>
+                <div class="sae-item"><strong>Valorisation pro.</strong>Maîtrise des tests unitaires et de l'optimisation des structures de données (Numpy).</div>
+            </div>
+            <div class="traces-container">
+                <a href="https://github.com/lc945/SAE-S6-Voronoi" target="_blank" class="btn-trace btn-github"><i class="fab fa-github"></i> Trace : Dépôt GitHub (Code source)</a>
+                <a href="https://drive.google.com/file/d/1LjxAvLG34SOacfcTqkJFtNgc4Waeu8Gn/view?usp=sharing" target="_blank" class="btn-trace btn-drive"><i class="fab fa-google-drive"></i> Trace : Livrable Final (PDF)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="auto-eval">
+        <div class="section-header">
+            <h2>Auto-évaluation et Recul Critique (Par SAÉ)</h2>
+        </div>
+        <div class="eval-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Contexte (SAÉ / Projet)</th>
+                        <th style="width: 25%;">Déroulement & Points Forts</th>
+                        <th style="width: 30%;">Les Vrais Problèmes & Galères techniques</th>
+                        <th style="width: 30%;">Acquis / "Si c'était à refaire"</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SAÉ Enquête Devenir Diplômés</strong></td>
+                        <td><span style="color:var(--success)">Points forts :</span> J'ai pris le lead sur la conception du MCD. On a passé beaucoup de temps avec les chefs de département pour comprendre ce qu'ils voulaient vraiment, ce qui a sauvé la structure de la BDD.</td>
+                        <td><span style="color:var(--danger)">Vrais problèmes :</span> On a été totalement bloqués par un facteur externe : les professeurs n'ont pas réussi à récupérer les données du questionnaire. C'était extrêmement frustrant de coder toute la logique d'analyse sous Pandas pour finalement n'avoir aucune "vraie" data à visualiser.</td>
+                        <td><span style="color:white">Acquis :</span> Ne jamais dépendre à 100% d'une source de données externe pour avancer.<br><br><strong>Si c'était à refaire :</strong> Je générerais immédiatement un faux jeu de données (mock data) massif avec un script Python dès la semaine 1, pour pouvoir coder et tester mes graphiques Matplotlib sans attendre l'administration.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Projet THALES</strong></td>
+                        <td><span style="color:var(--success)">Points forts :</span> Travailler avec Thales m'a montré les vraies attentes de l'industrie. J'ai réussi à implémenter Streamlit pour leur faire un Dashboard interactif très rapidement.</td>
+                        <td><span style="color:var(--danger)">Vrais problèmes :</span> J'ai totalement sous-estimé l'utilisation de l'API Groq (LLM). Au début, mon script de web scraping envoyait tout le texte brut des PDF à l'IA. Résultat : on explosait la limite de tokens, l'IA "hallucinait" et les temps de réponse étaient désastreux.</td>
+                        <td><span style="color:white">Acquis :</span> L'IA n'est pas magique. J'ai dû apprendre à faire du nettoyage sémantique (chunking) avant de faire mes appels API.<br><br><strong>Si c'était à refaire :</strong> J'implémenterais une base de données locale (ou du cache) pour stocker les résumés déjà générés et éviter de repayer / refaire des requêtes API inutiles sur les mêmes documents 6G.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BookWise (Flutter)</strong></td>
+                        <td><span style="color:var(--success)">Points forts :</span> J'ai été très exigeant avec moi-même sur l'UI/UX. J'ai produit une interface qui n'a rien à envier à une application professionnelle finie.</td>
+                        <td><span style="color:var(--danger)">Vrais problèmes :</span> L'enfer de l'état asynchrone. Au début, j'utilisais des `setState` un peu partout. Dès que l'application s'est complexifiée, le code est devenu illisible et l'application ramait à chaque changement d'écran.</td>
+                        <td><span style="color:white">Acquis :</span> La compréhension forcée d'une architecture propre. J'ai dû tout refactoriser pour utiliser <strong>Provider</strong> et séparer strictement mon Front-End de mon Back-End SQLite.<br><br><strong>Si c'était à refaire :</strong> Je dessinerais l'architecture des flux de données sur papier avant d'écrire la moindre ligne de code d'interface.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stage BUT 2 : Attis-Packdis</strong><br><span style="font-size: 0.85rem; color: var(--text-muted);">Développement intranet</span></td>
+                        <td><span style="color:var(--success)">Points forts :</span> J'ai réussi à livrer l'intranet "INFRANET" en temps et en heure, et il a été réellement adopté par les employés pour la gestion du matériel.</td>
+                        <td><span style="color:var(--danger)">Vrais problèmes :</span> La douche froide de l'écosystème. J'étais habitué aux frameworks libres (Laravel, etc.) avec une énorme communauté sur StackOverflow. Arriver sur WINDEV/WEBDEV et le WLangage, qui sont propriétaires et fermés, m'a demandé un énorme effort d'adaptation au début.</td>
+                        <td><span style="color:white">Acquis :</span> Savoir lire une documentation officielle aride et m'adapter à n'importe quel outil imposé par une entreprise.<br><br><strong>Si c'était à refaire :</strong> Je ferais tester l'interface aux utilisateurs beaucoup plus tôt. J'ai dû refaire des écrans parce que ma logique de développeur ne correspondait pas à leur logique métier.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Projet : L'Illusionniste</strong><br><span style="font-size: 0.85rem; color: var(--text-muted);">Python / Pygame</span></td>
+                        <td><span style="color:var(--success)">Points forts :</span> J'ai adoré mêler les mathématiques (calcul de la distance euclidienne) au rendu visuel interactif. C'était très satisfaisant de voir la synthèse RGB réagir en direct aux inputs du joueur.</td>
+                        <td><span style="color:var(--danger)">Vrais problèmes :</span> La gestion de la boucle d'événements (Event Loop) sous Pygame. Au début, mon jeu figeait complètement ou saccadait si on cliquait trop vite, car je bloquais le thread principal avec des calculs de couleur non optimisés.</td>
+                        <td><span style="color:white">Acquis :</span> Comprendre concrètement comment fonctionne le rafraîchissement d'une interface en temps réel (la fameuse gestion du framerate).<br><br><strong>Si c'était à refaire :</strong> J'arrêterais de coder toute la logique en vrac dans un fichier principal. Je ferais un vrai découpage en classes (orienté objet) pour bien séparer la gestion de l'interface graphique et le "moteur" mathématique du jeu.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SAÉ S6 : Diagramme de Voronoï</strong><br><span style="font-size: 0.85rem; color: var(--text-muted);">Python / Numpy / Tkinter</span></td>
+                        <td><span style="color:var(--success)">Points forts :</span> L'intégration de tests unitaires rigoureux avec <strong>Pytest</strong>. Ça m'a littéralement sauvé la vie quand j'ai dû modifier la génération de la grille sans casser le comportement de mon interface Matplotlib/Tkinter.</td>
+                        <td><span style="color:var(--danger)">Vrais problèmes :</span> La complexité algorithmique. Mon approche initiale "brute-force" pour calculer et colorier les régions marchait bien sur une petite fenêtre, mais quand j'ai passé le programme en haute résolution, ça a saturé le CPU et mon PC a planté.</td>
+                        <td><span style="color:white">Acquis :</span> La prise de conscience très brutale de ce qu'est la complexité temporelle. Un algo naïf tue une application desktop en 2 secondes.<br><br><strong>Si c'était à refaire :</strong> Au lieu de foncer tête baissée vers la solution la plus simple à coder, j'implémenterais d'emblée un algorithme mathématiquement optimisé (comme l'algorithme de Fortune) pour alléger le processeur.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <div class="container" id="competences">
+        <div class="section-header">
+            <h2>Synthèse des 6 Compétences & Modules Associés</h2>
+        </div>
+        <div class="grid-2">
+            <!-- C1 -->
+            <div class="comp-block">
+                <div class="module-tag">Ressources associées : Dev Avancé, Qualité Algorithmique, Programmation Mobile</div>
+                <h3 class="comp-title"><i class="fa-solid fa-code"></i> 1. Réaliser</h3>
+                <p>J'ai consolidé ma maîtrise du développement Full-Stack. Mes apprentissages théoriques en <strong>qualité algorithmique</strong> m'ont permis de produire du code "Clean" sur Flutter/Dart (BookWise) et Python. Je comprends et j'applique l'architecture MVC et la gestion des flux d'informations asynchrones.</p>
+            </div>
+            <!-- C2 -->
+            <div class="comp-block">
+                <div class="module-tag">Ressources associées : Mathématiques pour l'informatique, Analyse Numérique</div>
+                <h3 class="comp-title"><i class="fa-solid fa-gauge-high"></i> 2. Optimiser</h3>
+                <p>L'optimisation ne concerne pas que le code. Grâce aux modules d'analyse, j'ai optimisé les traitements de masse sous Pandas et réduit les temps de réponse de l'API LLM sur le projet Thales en optimisant sémantiquement les algorithmes de web scraping.</p>
+            </div>
+            <!-- C3 -->
+            <div class="comp-block">
+                <div class="module-tag">Ressources associées : Administration Système, Virtualisation, Cybersécurité</div>
+                <h3 class="comp-title"><i class="fa-solid fa-server"></i> 3. Administrer</h3>
+                <p>J'ai pu confronter mes cours d'administration à la réalité critique du terrain en tant que Technicien Informatique pour les <strong>JO Paris 2024</strong> (Site La Concorde). Je maîtrise par ailleurs la conteneurisation logicielle via Docker et l'administration de bases de données (PostgreSQL).</p>
+            </div>
+            <!-- C4 -->
+            <div class="comp-block">
+                <div class="module-tag">Ressources associées : Bases de données avancées, Traitement de données</div>
+                <h3 class="comp-title"><i class="fa-solid fa-database"></i> 4. Gérer</h3>
+                <p>Au-delà de la manipulation SQL et NoSQL (MongoDB), la pédagogie de l'IUT m'a sensibilisé aux enjeux de cohérence des données. La structuration de données non-structurées (Scraping Thales) et la gestion d'imports massifs via CSV constituent des acquis majeurs de mon parcours.</p>
+            </div>
+            <!-- C5 -->
+            <div class="comp-block">
+                <div class="module-tag">Ressources associées : Méthodologie agile, Management des Systèmes d'Information</div>
+                <h3 class="comp-title"><i class="fa-solid fa-list-check"></i> 5. Conduire</h3>
+                <p>L'organisation en SAÉ m'a forgé en tant que "chef de projet". De la gestion des jalons du projet Thales à la prise d'initiative entrepreneuriale globale, je sais tenir un cahier des charges, documenter mon code (GitHub) et respecter des livrables stricts.</p>
+            </div>
+            <!-- C6 -->
+            <div class="comp-block">
+                <div class="module-tag">Ressources associées : Communication professionnelle, Projets Tutorés</div>
+                <h3 class="comp-title"><i class="fa-solid fa-users"></i> 6. Collaborer</h3>
+                <p>Le développement est un travail d'équipe. J'ai collaboré en trinôme (enquête) et en équipe de 5 avec des professionnels (Thales). J'ai acquis une grande flexibilité et la capacité d'argumenter techniquement mes choix face à mes pairs et mes professeurs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="stage">
+        <div class="section-header">
+            <h2>Missions et Bilan Professionnel : Le Projet Agdel Parfumerie</h2>
+        </div>
+        <div class="stage-box">
+            <div class="badge">Équivalent Stage BUT 3</div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--accent);">Entrepreneuriat : Les dessous d'Agdel Parfumerie</h3>
+            
+            <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">N'ayant pas décroché de stage traditionnel cette année, j'ai décidé de créer mon propre contexte professionnel en lançant <strong>Agdel Parfumerie</strong>. Au-delà de l'aspect commercial, ça a été un énorme défi technique et d'administration système.</p>
+
+            <div class="eval-table-wrapper" style="margin-bottom: 0;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="width: 25%; background: rgba(16, 185, 129, 0.05);"><strong><i class="fa-solid fa-check"></i> Ce dont je suis fier</strong></td>
+                            <td>Avoir assumé un projet de bout en bout. Choisir et configurer le nom de domaine, gérer les certificats de sécurité, concevoir entièrement l'UI/UX sur Shopify pour avoir un rendu premium, et assurer la mise en production réelle. J'étais seul face à mes bugs.</td>
+                        </tr>
+                        <tr>
+                            <td style="background: rgba(239, 68, 68, 0.05);"><strong><i class="fa-solid fa-triangle-exclamation"></i> Les Vrais Problèmes (La Data)</strong></td>
+                            <td>L'enfer de l'intégrité des données de catalogue. La parfumerie de niche est complexe (notes de tête, de cœur, différents formats pour un même flacon). Lors de mes imports massifs par fichiers CSV, la moindre erreur de virgule ou de typage (par exemple sur les déclinaisons complexes du <em>Vanilla Exotica de Jean Couturier</em>) faisait exploser l'affichage du site et créait des erreurs de stock.</td>
+                        </tr>
+                        <tr>
+                            <td style="background: rgba(245, 158, 11, 0.05);"><strong><i class="fa-solid fa-rotate-left"></i> Si c'était à refaire</strong></td>
+                            <td>Je ne ferais plus jamais confiance à un fichier CSV brut ou à un fichier Excel fourni par un grossiste. J'utiliserais mes compétences en Python (Pandas) pour coder un script de "Data Cleaning" strict qui parse, vérifie et nettoie automatiquement les données avant toute tentative d'importation dans la base de données Shopify.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="traces-container" style="margin-top: 30px; border-top: none;">
+                <a href="https://www.agdel-parfumerie.fr/password" target="_blank" class="btn-trace btn-drive"><i class="fa-solid fa-link"></i> Trace : Agdel Parfumerie (Production)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="conclusion" style="padding-top: 0;">
+        <div class="section-header">
+            <h2>Conclusion & Perspectives pour la suite</h2>
+        </div>
+        <p style="font-size: 1.15rem; color: #cbd5e1; max-width: 900px; margin-bottom: 20px;">L'élaboration de ce portfolio témoigne d'un parcours universitaire riche, marqué par une forte résilience. Mes <strong>points forts</strong> résident dans mon esprit d'analyse et ma capacité à transformer un obstacle (comme l'absence d'un stage) en une création de valeur (BookWise, Agdel Parfumerie).</p>
+        <p style="font-size: 1.15rem; color: #cbd5e1; max-width: 900px; margin-bottom: 20px;">Mon principal <strong>point de vigilance</strong> reste ma gestion du temps académique. Si mon esprit logique m'a souvent permis de réussir mes examens en révisant les DST à la dernière minute, l'exigence de la formation a montré les limites de cette méthode. Mon objectif pour ma poursuite d'études est de structurer davantage mes périodes de révisions.</p>
+        <p style="font-size: 1.15rem; color: var(--accent); font-weight: 600; max-width: 900px;">Profondément motivé par les découvertes faites cette année autour de l'IA, de la Data et de l'UI/UX, je suis déterminé à poursuivre mon cursus au sein de l'Université Sorbonne Paris-Nord pour y consolider ces acquis et y achever ma professionnalisation.</p>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--surface-light);">
+        <p style="color: var(--text-muted);">&copy; 2026 Hocine ZARED — Document réalisé dans le cadre du Portfolio BUT 3 Informatique</p>
+    </footer>
+
+</body>
+</html>
